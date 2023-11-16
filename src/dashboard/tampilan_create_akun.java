@@ -25,6 +25,7 @@ public class tampilan_create_akun extends javax.swing.JFrame {
     public tampilan_create_akun() {
         initComponents();   
         norm();
+        System.out.println("Aku");
     }
     
     public void norm(){
