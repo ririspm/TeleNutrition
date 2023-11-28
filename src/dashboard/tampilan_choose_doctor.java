@@ -5,7 +5,9 @@
  */
 package dashboard;
 
+import static dashboard.tampilan_biodata.id_detail;
 import static dashboard.tampilan_biodata.txt_iduser;
+import static dashboard.tampilan_dashboard.id_detail;
 import static dashboard.tampilan_dashboard.txt_iduser;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
@@ -45,7 +47,23 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
         }
     
     }
+ public static void tampil_konsul(){
+        try {
+            String sql = "select konsultasi.id_konsultasi,konsultasi.imt_bti,konsultasi.advice,konsultasi.id_detail,konsultasi.id_dokter,konsultasi.total, detail_user.nik from konsultasi join detail_user on konsultasi.id_detail = detail_user.id_detail where konsultasi.id_detail = '"+id_detail.getText()+"'";
+            java.sql.Connection conn = (Connection)koneksi.konek.configDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            java.sql.ResultSet rst = pst.executeQuery();
+            if(rst.next()){
+                tampilan_konsultasi.txt_imt.setText(rst.getString("imt_bti"));
+                tampilan_konsultasi.txt_total.setText(rst.getString("total"));
+                tampilan_konsultasi.txt_advice.setText(rst.getString("advice"));
+                tampilan_konsultasi.nik.setText(rst.getString("nik"));
+            }
+        } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
 
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,6 +84,7 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        id_detail = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -118,7 +137,7 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton7);
-        jButton7.setBounds(0, 710, 480, 100);
+        jButton7.setBounds(0, 720, 480, 100);
 
         jButton8.setContentAreaFilled(false);
         jButton8.setInheritsPopupMenu(true);
@@ -168,6 +187,10 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
         getContentPane().add(jButton4);
         jButton4.setBounds(1230, 380, 260, 220);
 
+        id_detail.setText("jLabel2");
+        getContentPane().add(id_detail);
+        id_detail.setBounds(910, 60, 51, 20);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Halaman Choose Doctor (1).png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 1920, 1080);
@@ -180,6 +203,8 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
         dispose();
         String id = txt_iduser.getText();
         tampilan_dashboard.txt_iduser.setText(id);
+                   String id_details = id_detail.getText();
+        tampilan_dashboard.id_detail.setText(id_details);
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -187,6 +212,8 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
         dispose();
         String id = txt_iduser.getText();
         tampilan_biodata.txt_iduser.setText(id);
+                   String id_details = id_detail.getText();
+        tampilan_biodata.id_detail.setText(id_details);
         showdata();
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -200,10 +227,17 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
         dispose();
         String id = txt_iduser.getText();
         tampilan_konsul_user.txt_id_user.setText(id);
+                   String id_details = id_detail.getText();
+        tampilan_konsul_user.id_detail.setText(id_details);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        new tampilan_report().setVisible(true);
+        new tampilan_konsultasi().setVisible(true);
+        tampil_konsul();
+        String id = txt_iduser.getText();
+        tampilan_konsultasi.txt_iduser.setText(id);
+                   String id_details = id_detail.getText();
+        tampilan_konsultasi.id_detail.setText(id_details);
         dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -225,6 +259,8 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
                 tampilan_konsul_user.txt_id_dokter.setText(rst.getString("id_dokter"));
                 String id = txt_iduser.getText();
         tampilan_konsul_user.txt_id_user.setText(id);
+                   String id_details = id_detail.getText();
+        tampilan_konsul_user.id_detail.setText(id_details);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -246,6 +282,8 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
                 tampilan_konsul_user.txt_id_dokter.setText(rst.getString("id_dokter"));
                 String id = txt_iduser.getText();
         tampilan_konsul_user.txt_id_user.setText(id);
+                   String id_details = id_detail.getText();
+        tampilan_konsul_user.id_detail.setText(id_details);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -266,6 +304,8 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
                 tampilan_konsul_user.txt_id_dokter.setText(rst.getString("id_dokter"));
                 String id = txt_iduser.getText();
         tampilan_konsul_user.txt_id_user.setText(id);
+                   String id_details = id_detail.getText();
+        tampilan_konsul_user.id_detail.setText(id_details);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -286,6 +326,8 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
                 tampilan_konsul_user.txt_id_dokter.setText(rst.getString("id_dokter"));
                 String id = txt_iduser.getText();
         tampilan_konsul_user.txt_id_user.setText(id);
+                   String id_details = id_detail.getText();
+        tampilan_konsul_user.id_detail.setText(id_details);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -328,6 +370,7 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JLabel id_detail;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;

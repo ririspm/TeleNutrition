@@ -31,12 +31,13 @@ public class tampilan_login extends javax.swing.JFrame {
     
      void tampil(){
         try {
-            String sql = "SELECT user.id_user from user where email ='"+txt_email.getText()+"';";
+            String sql = "SELECT user.id_user, detail_user.id_detail from user join detail_user on user.id_user = detail_user.id_user where user.email = '"+txt_email.getText()+"'";
             java.sql.Connection conn = (Connection)koneksi.konek.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             java.sql.ResultSet rst = pst.executeQuery();
             if(rst.next()){
                 tampilan_dashboard.txt_iduser.setText(rst.getString("id_user"));
+                tampilan_dashboard.id_detail.setText(rst.getString("id_detail"));
             }
         } catch (Exception e) {
         }
@@ -99,10 +100,20 @@ public class tampilan_login extends javax.swing.JFrame {
                     java.sql.ResultSet rst = pst.executeQuery();
 
                     while (rst.next()) {
-                        JOptionPane.showMessageDialog(this, "Login Berhasil");
+                        int level = rst.getInt("level");
+                        
+                        if (level == 2) {
+                            JOptionPane.showMessageDialog(this, "Login Berhasil");
+                            new dokter.tampilan_list_konsul().setVisible(true);
+                            this.setVisible(false);
+                        }else{
+                            JOptionPane.showMessageDialog(this, "Login Berhasil");
                         new tampilan_dashboard().setVisible(true);
                         this.setVisible(false);
                         tampil();
+                        }
+                        
+                        
                     }
                 } catch (Exception e) {
                     System.out.println("gagal Login"+ e.getMessage());

@@ -5,6 +5,14 @@
  */
 package dashboard;
 
+import static dashboard.tampilan_biodata.id_detail;
+import static dashboard.tampilan_biodata.txt_iduser;
+import static dashboard.tampilan_dashboard.id_detail;
+import dokter.tampilan_input_hasil;
+import static dokter.tampilan_konsul_pelanggan.id_user;
+import java.sql.Connection;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HP
@@ -16,7 +24,26 @@ public class tampilan_konsultasi extends javax.swing.JFrame {
      */
     public tampilan_konsultasi() {
         initComponents();
+        tampil_konsul();
     }
+    public static void tampil_konsul(){
+        try {
+            String sql = "select konsultasi.id_konsultasi,konsultasi.imt_bti,konsultasi.advice,konsultasi.id_detail,konsultasi.id_dokter,konsultasi.total, detail_user.nik from konsultasi join detail_user on konsultasi.id_detail = detail_user.id_detail where konsultasi.id_detail = '"+id_detail.getText()+"'";
+            java.sql.Connection conn = (Connection)koneksi.konek.configDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            java.sql.ResultSet rst = pst.executeQuery();
+            if(rst.next()){
+                tampilan_konsultasi.txt_imt.setText(rst.getString("imt_bti"));
+                tampilan_konsultasi.txt_total.setText(rst.getString("total"));
+                tampilan_konsultasi.txt_advice.setText(rst.getString("advice"));
+                tampilan_konsultasi.nik.setText(rst.getString("nik"));
+            }
+        } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,18 +54,34 @@ public class tampilan_konsultasi extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txt_total = new javax.swing.JLabel();
+        nik = new javax.swing.JLabel();
+        txt_imt = new javax.swing.JTextField();
+        txt_advice = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        txt_iduser = new javax.swing.JLabel();
+        id_detail = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1920, 1080));
         setUndecorated(true);
         getContentPane().setLayout(null);
+
+        txt_total.setText("jLabel3");
+        getContentPane().add(txt_total);
+        txt_total.setBounds(1360, 810, 180, 30);
+        getContentPane().add(nik);
+        nik.setBounds(900, 310, 330, 30);
+        getContentPane().add(txt_imt);
+        txt_imt.setBounds(690, 490, 500, 160);
+        getContentPane().add(txt_advice);
+        txt_advice.setBounds(690, 780, 500, 150);
 
         jButton10.setContentAreaFilled(false);
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +128,7 @@ public class tampilan_konsultasi extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton7);
-        jButton7.setBounds(0, 710, 480, 100);
+        jButton7.setBounds(0, 710, 480, 140);
 
         jButton8.setContentAreaFilled(false);
         jButton8.setInheritsPopupMenu(true);
@@ -96,8 +139,14 @@ public class tampilan_konsultasi extends javax.swing.JFrame {
         });
         getContentPane().add(jButton8);
         jButton8.setBounds(0, 830, 480, 100);
+        getContentPane().add(txt_iduser);
+        txt_iduser.setBounds(1020, 70, 170, 40);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Halaman Consultation.png"))); // NOI18N
+        id_detail.setText("jLabel2");
+        getContentPane().add(id_detail);
+        id_detail.setBounds(910, 60, 51, 20);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Hasil Konsul.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 1920, 1080);
 
@@ -106,26 +155,46 @@ public class tampilan_konsultasi extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
        new tampilan_dashboard().setVisible(true);
+       String id_details = id_detail.getText();
+        tampilan_dashboard.id_detail.setText(id_details);
+         String id = txt_iduser.getText();
+        tampilan_dashboard.txt_iduser.setText(id);
         dispose();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         new tampilan_biodata().setVisible(true);
+        String id_details = id_detail.getText();
+        tampilan_biodata.id_detail.setText(id_details);
+         String id = txt_iduser.getText();
+        tampilan_biodata.txt_iduser.setText(id);
         dispose();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         new tampilan_choose_doctor().setVisible(true);
+        String id_details = id_detail.getText();
+        tampilan_choose_doctor.id_detail.setText(id_details);
+         String id = txt_iduser.getText();
+        tampilan_choose_doctor.txt_iduser.setText(id);
         dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        new tampilan_konsultasi().setVisible(true);
+        new tampilan_konsul_user().setVisible(true);
+        String id_details = id_detail.getText();
+        tampilan_konsul_user.id_detail.setText(id_details);
+         String id = txt_iduser.getText();
+        tampilan_konsul_user.txt_id_user.setText(id);
         dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         new tampilan_report().setVisible(true);
+        String id_details = id_detail.getText();
+        tampilan_konsultasi.id_detail.setText(id_details);
+         String id = txt_iduser.getText();
+        tampilan_konsultasi.txt_iduser.setText(id);
         dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -169,6 +238,7 @@ public class tampilan_konsultasi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JLabel id_detail;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -176,5 +246,10 @@ public class tampilan_konsultasi extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    public static javax.swing.JLabel nik;
+    public static javax.swing.JTextField txt_advice;
+    public static javax.swing.JLabel txt_iduser;
+    public static javax.swing.JTextField txt_imt;
+    public static javax.swing.JLabel txt_total;
     // End of variables declaration//GEN-END:variables
 }
