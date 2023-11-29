@@ -42,6 +42,20 @@ public class tampilan_login extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+     
+     void tampildokter(){
+        try {
+            String sql = "select user.id_user, dokter.nama_dokter,dokter.id_dokter from user join dokter on user.id_user = dokter.id_user where password = '"+txt_pass.getText()+"'";
+            java.sql.Connection conn = (Connection)koneksi.konek.configDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            java.sql.ResultSet rst = pst.executeQuery();
+            if(rst.next()){
+                dokter.tampilan_list_konsul.id_dokter.setText(rst.getString("id_dokter"));
+            }
+        } catch (Exception e) {
+        }
+    }
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -106,6 +120,7 @@ public class tampilan_login extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(this, "Login Berhasil");
                             new dokter.tampilan_list_konsul().setVisible(true);
                             this.setVisible(false);
+                        tampildokter();
                         }else{
                             JOptionPane.showMessageDialog(this, "Login Berhasil");
                         new tampilan_dashboard().setVisible(true);

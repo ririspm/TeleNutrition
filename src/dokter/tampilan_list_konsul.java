@@ -62,7 +62,7 @@ public class tampilan_list_konsul extends javax.swing.JFrame {
        
         try {
             Statement s = koneksi.konek.configDB().createStatement();
-            ResultSet rs = s.executeQuery(" select konsultasi_user.id_konsultasi_user,detail_user.nama_lengkap, konsultasi_user.isi_konsultasi, dokter.nama_dokter from detail_user join konsultasi_user on detail_user.id_user = konsultasi_user.id_user join dokter on konsultasi_user.id_dokter = dokter.id_dokter;");
+            ResultSet rs = s.executeQuery(" select konsultasi_user.id_konsultasi_user,detail_user.nama_lengkap, konsultasi_user.isi_konsultasi, dokter.nama_dokter,dokter.id_dokter from detail_user join konsultasi_user on detail_user.id_user = konsultasi_user.id_user join dokter on konsultasi_user.id_dokter = dokter.id_dokter;");
             
             
             while(rs.next())
@@ -95,6 +95,7 @@ public class tampilan_list_konsul extends javax.swing.JFrame {
 
         id_user = new javax.swing.JLabel();
         id_konsul = new javax.swing.JLabel();
+        id_dokter = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_list = new javax.swing.JTable();
@@ -111,6 +112,10 @@ public class tampilan_list_konsul extends javax.swing.JFrame {
         id_konsul.setText("jLabel2");
         getContentPane().add(id_konsul);
         id_konsul.setBounds(910, 70, 51, 20);
+
+        id_dokter.setText("jLabel2");
+        getContentPane().add(id_dokter);
+        id_dokter.setBounds(750, 120, 51, 20);
 
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,6 +214,7 @@ public class tampilan_list_konsul extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JLabel id_dokter;
     private javax.swing.JLabel id_konsul;
     private javax.swing.JLabel id_user;
     private javax.swing.JButton jButton1;

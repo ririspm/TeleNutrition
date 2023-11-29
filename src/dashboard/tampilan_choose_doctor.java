@@ -8,6 +8,7 @@ package dashboard;
 import static dashboard.tampilan_biodata.id_detail;
 import static dashboard.tampilan_biodata.txt_iduser;
 import static dashboard.tampilan_dashboard.id_detail;
+import static dashboard.tampilan_dashboard.tampil_hasil_konsul;
 import static dashboard.tampilan_dashboard.txt_iduser;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
@@ -49,7 +50,7 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
     }
  public static void tampil_konsul(){
         try {
-            String sql = "select konsultasi.id_konsultasi,konsultasi.imt_bti,konsultasi.advice,konsultasi.id_detail,konsultasi.id_dokter,konsultasi.total, detail_user.nik from konsultasi join detail_user on konsultasi.id_detail = detail_user.id_detail where konsultasi.id_detail = '"+id_detail.getText()+"'";
+            String sql = "select konsultasi.id_konsultasi,konsultasi.imt_bti,konsultasi.advice,konsultasi.id_detail,konsultasi.id_dokter,konsultasi.total, detail_user.nik from konsultasi join detail_user on konsultasi.id_detail = detail_user.id_detail where konsultasi.id_detail = '"+id_detail.getText()+"' order by id_detail desc";
             java.sql.Connection conn = (Connection)koneksi.konek.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             java.sql.ResultSet rst = pst.executeQuery();
@@ -58,6 +59,24 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
                 tampilan_konsultasi.txt_total.setText(rst.getString("total"));
                 tampilan_konsultasi.txt_advice.setText(rst.getString("advice"));
                 tampilan_konsultasi.nik.setText(rst.getString("nik"));
+            }
+        } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e);
+
+        }
+    }
+  public static void tampil_hasil_konsul(){
+        try {
+            String sql = "select hasil_konsultasi.id_rm,hasil_konsultasi.hasil,hasil_konsultasi.id_detail,hasil_konsultasi.id_dokter, dokter.nama_dokter,dokter.jam_operasi_mulai,dokter.jam_operasi_selesai from hasil_konsultasi join dokter on hasil_konsultasi.id_dokter = dokter.id_dokter where id_detail = '"+id_detail.getText()+"'";
+            java.sql.Connection conn = (Connection)koneksi.konek.configDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            java.sql.ResultSet rst = pst.executeQuery();
+            if(rst.next()){
+                tampilan_report.no_rm.setText(rst.getString("id_rm"));
+                tampilan_report.hasil.setText(rst.getString("hasil"));
+                tampilan_report.nama_dokter.setText(rst.getString("nama_dokter"));
+                tampilan_report.jam_mulai.setText(rst.getString("jam_operasi_mulai"));
+                tampilan_report.jam_selesai.setText(rst.getString("jam_operasi_selesai"));
             }
         } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, e);
@@ -78,13 +97,13 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
         txt_iduser = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         id_detail = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -138,16 +157,6 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
         });
         getContentPane().add(jButton7);
         jButton7.setBounds(0, 720, 480, 100);
-
-        jButton8.setContentAreaFilled(false);
-        jButton8.setInheritsPopupMenu(true);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton8);
-        jButton8.setBounds(0, 830, 480, 100);
         getContentPane().add(txt_iduser);
         txt_iduser.setBounds(720, 70, 170, 40);
 
@@ -190,6 +199,16 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
         id_detail.setText("jLabel2");
         getContentPane().add(id_detail);
         id_detail.setBounds(910, 60, 51, 20);
+
+        jButton8.setContentAreaFilled(false);
+        jButton8.setInheritsPopupMenu(true);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton8);
+        jButton8.setBounds(0, 850, 480, 100);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Halaman Choose Doctor (1).png"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -240,10 +259,6 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
         tampilan_konsultasi.id_detail.setText(id_details);
         dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        try {
@@ -333,6 +348,17 @@ public class tampilan_choose_doctor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        new tampilan_report().setVisible(true);
+               tampil_hasil_konsul();
+
+        String id = txt_iduser.getText();
+        String id_details = id_detail.getText();
+        tampilan_report.txt_iduser.setText(id);
+        tampilan_report.id_detail.setText(id_details);
+        dispose();
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
