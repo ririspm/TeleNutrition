@@ -31,12 +31,24 @@ public class tampilan_login extends javax.swing.JFrame {
     
      void tampil(){
         try {
-            String sql = "SELECT user.id_user, detail_user.id_detail from user join detail_user on user.id_user = detail_user.id_user where user.email = '"+txt_email.getText()+"'";
+            String sql = "select * from user where email = '"+txt_email.getText()+"'";
             java.sql.Connection conn = (Connection)koneksi.konek.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             java.sql.ResultSet rst = pst.executeQuery();
             if(rst.next()){
                 tampilan_dashboard.txt_iduser.setText(rst.getString("id_user"));
+                tampilan_dashboard.id_detail.setText(rst.getString("id_detail"));
+            }
+        } catch (Exception e) {
+        }
+    }
+     void tampildetail(){
+        try {
+            String sql = "SELECT user.id_user, detail_user.id_detail from user join detail_user on user.id_user = detail_user.id_user where user.email = '"+txt_email.getText()+"'";
+            java.sql.Connection conn = (Connection)koneksi.konek.configDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            java.sql.ResultSet rst = pst.executeQuery();
+            if(rst.next()){
                 tampilan_dashboard.id_detail.setText(rst.getString("id_detail"));
             }
         } catch (Exception e) {
@@ -126,6 +138,7 @@ public class tampilan_login extends javax.swing.JFrame {
                         new tampilan_dashboard().setVisible(true);
                         this.setVisible(false);
                         tampil();
+                            tampildetail();
                         }
                         
                         

@@ -62,7 +62,7 @@ public class tampilan_list_konsul extends javax.swing.JFrame {
        
         try {
             Statement s = koneksi.konek.configDB().createStatement();
-            ResultSet rs = s.executeQuery(" select konsultasi_user.id_konsultasi_user,detail_user.nama_lengkap, konsultasi_user.isi_konsultasi, dokter.nama_dokter,dokter.id_dokter from detail_user join konsultasi_user on detail_user.id_user = konsultasi_user.id_user join dokter on konsultasi_user.id_dokter = dokter.id_dokter;");
+            ResultSet rs = s.executeQuery(" select konsultasi_user.id_konsultasi_user,detail_user.nama_lengkap, konsultasi_user.isi_konsultasi, dokter.nama_dokter,dokter.id_dokter from detail_user join konsultasi_user on detail_user.id_user = konsultasi_user.id_user join dokter on konsultasi_user.id_dokter = dokter.id_dokter where konsultasi_user.status = 'Belum Diperiksa';");
             
             
             while(rs.next())
@@ -97,6 +97,7 @@ public class tampilan_list_konsul extends javax.swing.JFrame {
         id_konsul = new javax.swing.JLabel();
         id_dokter = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_list = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -124,6 +125,16 @@ public class tampilan_list_konsul extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1);
         jButton1.setBounds(1290, 930, 310, 80);
+
+        jButton7.setContentAreaFilled(false);
+        jButton7.setInheritsPopupMenu(true);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7);
+        jButton7.setBounds(0, 220, 480, 100);
 
         tb_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -178,6 +189,12 @@ public class tampilan_list_konsul extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        new tampilan_list_konsul().setVisible(true);
+        konsultasi();
+        dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -218,8 +235,9 @@ public class tampilan_list_konsul extends javax.swing.JFrame {
     private javax.swing.JLabel id_konsul;
     private javax.swing.JLabel id_user;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tb_list;
+    public static javax.swing.JTable tb_list;
     // End of variables declaration//GEN-END:variables
 }

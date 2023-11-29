@@ -85,7 +85,7 @@ public class tampilan_biodata extends javax.swing.JFrame {
      }
      public static void tampil_konsul(){
         try {
-            String sql = "select konsultasi.id_konsultasi,konsultasi.imt_bti,konsultasi.advice,konsultasi.id_detail,konsultasi.id_dokter,konsultasi.total, detail_user.nik from konsultasi join detail_user on konsultasi.id_detail = detail_user.id_detail where konsultasi.id_detail = '"+id_detail.getText()+"' order by id_detail desc";
+            String sql = "select konsultasi.id_konsultasi,konsultasi.imt_bti,konsultasi.advice,konsultasi.id_detail,konsultasi.id_dokter,konsultasi.total, detail_user.nik from konsultasi join detail_user on konsultasi.id_detail = detail_user.id_detail where konsultasi.id_detail = '"+id_detail.getText()+"' order by id_konsultasi desc limit 1";
             java.sql.Connection conn = (Connection)koneksi.konek.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             java.sql.ResultSet rst = pst.executeQuery();
@@ -116,6 +116,20 @@ public class tampilan_biodata extends javax.swing.JFrame {
         } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, e);
 
+        }
+    }
+      
+      void tampildetail(){
+        try {
+            String sql = "select * from detail_user where id_user = '"+txt_iduser.getText()+"'";
+            java.sql.Connection conn = (Connection)koneksi.konek.configDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            java.sql.ResultSet rst = pst.executeQuery();
+            if(rst.next()){
+//                tampilan_dashboard.txt_iduser.setText(rst.getString("id_user"));
+                tampilan_choose_doctor.id_detail.setText(rst.getString("id_detail"));
+            }
+        } catch (Exception e) {
         }
     }
 
@@ -362,6 +376,8 @@ public class tampilan_biodata extends javax.swing.JFrame {
              new tampilan_choose_doctor().setVisible(true);
             dispose();
         tampilan_choose_doctor.txt_iduser.setText(id);
+        tampilan_choose_doctor.id_detail.setText(iddetail);
+        
                         
         } catch (Exception e) {
              System.out.println("Gagal Update "+ e.getMessage());
@@ -378,6 +394,8 @@ public class tampilan_biodata extends javax.swing.JFrame {
             new tampilan_choose_doctor().setVisible(true);
             dispose();
             tampilan_choose_doctor.txt_iduser.setText(id);
+                    tampilan_choose_doctor.id_detail.setText(iddetail);
+
             
         } catch (Exception e) {
              System.out.println("Gagal Le"+ e.getMessage());

@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -53,6 +54,38 @@ public class tampilan_diet_plan extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Gagal");
         }
      }
+       private void konsultasi(){
+        DefaultTableModel tbl = new DefaultTableModel();
+        tbl.addColumn("Id konsultasi");
+        tbl.addColumn("Nama Lengkap");
+        tbl.addColumn("Isi Konsultasi");
+        tbl.addColumn("Nama Dokter");
+        
+        
+       
+        try {
+            Statement s = koneksi.konek.configDB().createStatement();
+            ResultSet rs = s.executeQuery(" select konsultasi_user.id_konsultasi_user,detail_user.nama_lengkap, konsultasi_user.isi_konsultasi, dokter.nama_dokter,dokter.id_dokter from detail_user join konsultasi_user on detail_user.id_user = konsultasi_user.id_user join dokter on konsultasi_user.id_dokter = dokter.id_dokter where konsultasi_user.status = 'Belum Diperiksa';");
+            
+            
+            while(rs.next())
+            {
+                tbl.addRow(new Object[] {
+                    rs.getString("id_konsultasi_user"),
+                    rs.getString("nama_lengkap"),
+                    rs.getString("isi_konsultasi"),
+                    rs.getString("nama_dokter"),
+             
+                });
+                tampilan_list_konsul.tb_list.setModel(tbl);
+                
+                
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Gagal"+e.getMessage());
+        }
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -120,18 +153,68 @@ public class tampilan_diet_plan extends javax.swing.JFrame {
         String id_dokter = txt_id_dokter.getText();
         
         try {
-            String sql = "INSERT INTO hasil_konsultasi VALUES ('"+id_rm.getText()+"','"+txt_hasil.getText()+"','"+id_detail+"','"+id_dokter+"')";
+            String sql = "select * from hasil_konsultasi where id_detail = '"+txt_id_detaill.getText()+"'";
             java.sql.Connection conn = (Connection)koneksi.konek.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-            pst.executeUpdate();
+            java.sql.ResultSet rst = pst.executeQuery();
+            if(rst.next()){
+                           String sql4 = "UPDATE hasil_konsultasi SET hasil = '"+txt_hasil.getText()+"' where id_detail = '"+txt_id_detaill.getText()+"' ";
+            java.sql.Connection con4 = (Connection)koneksi.konek.configDB();
+            java.sql.PreparedStatement pst4 = con4.prepareStatement(sql4);
+            pst4.executeUpdate();
+            String sql5 = "UPDATE konsultasi_user SET status = 'Sudah Diperiksa'";
+            java.sql.Connection con5 = (Connection)koneksi.konek.configDB();
+            java.sql.PreparedStatement pst5 = con5.prepareStatement(sql5);
+            pst5.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Berhasil Terupdate");
+            
+            new tampilan_list_konsul().setVisible(true);
+            tampilan_list_konsul.id_dokter.setText(id_dokter);
+            konsultasi();
+            dispose();
+              // insert data  
+            }else{
+                try {
+                    String sql2 = "INSERT INTO hasil_konsultasi VALUES ('"+id_rm.getText()+"','"+txt_hasil.getText()+"','"+id_detail+"','"+id_dokter+"')";
+            java.sql.Connection con2 = (Connection)koneksi.konek.configDB();
+            java.sql.PreparedStatement pst2 = con2.prepareStatement(sql2);
+            pst2.executeUpdate();
+            String sql3 = "UPDATE konsultasi_user SET status = 'Sudah Diperiksa'";
+            java.sql.Connection con = (Connection)koneksi.konek.configDB();
+            java.sql.PreparedStatement pst3 = con.prepareStatement(sql3);
+            pst3.executeUpdate();
             JOptionPane.showMessageDialog(this, "Berhasil Terkirim");
             
             new tampilan_list_konsul().setVisible(true);
+            tampilan_list_konsul.id_dokter.setText(id_dokter);
+            konsultasi();
             dispose();
             
         } catch (Exception e) {
-             System.out.println("Gagal Le"+ e.getMessage());
+             JOptionPane.showMessageDialog(this, "Pilih Dokter Terlebih Dahulu");
         }
+            }
+        } catch (Exception e) {
+        }
+//        try {
+//            String sql = "INSERT INTO hasil_konsultasi VALUES ('"+id_rm.getText()+"','"+txt_hasil.getText()+"','"+id_detail+"','"+id_dokter+"')";
+//            java.sql.Connection conn = (Connection)koneksi.konek.configDB();
+//            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+//            pst.executeUpdate();
+//            String sql2 = "UPDATE konsultasi_user SET status = 'Sudah Diperiksa'";
+//            java.sql.Connection con = (Connection)koneksi.konek.configDB();
+//            java.sql.PreparedStatement pst2 = con.prepareStatement(sql);
+//            pst2.executeUpdate();
+//            JOptionPane.showMessageDialog(this, "Berhasil Terkirim");
+//            
+//            new tampilan_list_konsul().setVisible(true);
+//            tampilan_list_konsul.id_dokter.setText(id_dokter);
+//            konsultasi();
+//            dispose();
+////            
+//        } catch (Exception e) {
+//             System.out.println("Gagal Le"+ e.getMessage());
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -45,7 +45,7 @@ public class tampilan_report extends javax.swing.JFrame {
     }
      public static void tampil_konsul(){
         try {
-            String sql = "select konsultasi.id_konsultasi,konsultasi.imt_bti,konsultasi.advice,konsultasi.id_detail,konsultasi.id_dokter,konsultasi.total, detail_user.nik from konsultasi join detail_user on konsultasi.id_detail = detail_user.id_detail where konsultasi.id_detail = '"+id_detail.getText()+"' order by id_detail desc";
+            String sql = "select konsultasi.id_konsultasi,konsultasi.imt_bti,konsultasi.advice,konsultasi.id_detail,konsultasi.id_dokter,konsultasi.total, detail_user.nik from konsultasi join detail_user on konsultasi.id_detail = detail_user.id_detail where konsultasi.id_detail = '"+id_detail.getText()+"' order by id_konsultasi desc limit 1";
             java.sql.Connection conn = (Connection)koneksi.konek.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             java.sql.ResultSet rst = pst.executeQuery();
@@ -72,7 +72,6 @@ public class tampilan_report extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         hasil = new javax.swing.JTextArea();
-        jButton10 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -84,6 +83,7 @@ public class tampilan_report extends javax.swing.JFrame {
         nama_dokter = new javax.swing.JLabel();
         jam_mulai = new javax.swing.JLabel();
         jam_selesai = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,15 +97,6 @@ public class tampilan_report extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(630, 350, 1030, 390);
-
-        jButton10.setContentAreaFilled(false);
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton10);
-        jButton10.setBounds(0, 220, 480, 110);
 
         jButton9.setContentAreaFilled(false);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -179,6 +170,15 @@ public class tampilan_report extends javax.swing.JFrame {
         getContentPane().add(jam_selesai);
         jam_selesai.setBounds(990, 890, 51, 20);
 
+        jButton10.setContentAreaFilled(false);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton10);
+        jButton10.setBounds(0, 220, 480, 110);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Halaman Report fix.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 1920, 1080);
@@ -189,10 +189,6 @@ public class tampilan_report extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-
-    }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         new tampilan_biodata().setVisible(true);
@@ -231,6 +227,15 @@ public class tampilan_report extends javax.swing.JFrame {
         tampilan_konsultasi.id_detail.setText(id_details);
         dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        new tampilan_dashboard().setVisible(true);
+        String id_details = id_detail.getText();
+        tampilan_dashboard.id_detail.setText(id_details);
+        String id = txt_iduser.getText();
+        tampilan_dashboard.txt_iduser.setText(id);
+        dispose();
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
