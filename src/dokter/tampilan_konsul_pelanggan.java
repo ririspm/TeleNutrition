@@ -82,6 +82,7 @@ public class tampilan_konsul_pelanggan extends javax.swing.JFrame {
         getContentPane().add(id_user);
         id_user.setBounds(660, 80, 51, 20);
 
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -94,8 +95,12 @@ public class tampilan_konsul_pelanggan extends javax.swing.JFrame {
         getContentPane().add(id_konsul);
         id_konsul.setBounds(1000, 50, 51, 20);
 
+        jScrollPane1.setBorder(null);
+
         konsul_pelanggan.setEditable(false);
         konsul_pelanggan.setColumns(20);
+        konsul_pelanggan.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        konsul_pelanggan.setForeground(new java.awt.Color(75, 116, 55));
         konsul_pelanggan.setRows(5);
         jScrollPane1.setViewportView(konsul_pelanggan);
 

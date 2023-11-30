@@ -204,11 +204,21 @@ public class tampilan_konsul_user extends javax.swing.JFrame {
         txt_id_konsultasi_user.setBounds(760, 80, 200, 30);
         getContentPane().add(txt_id_dokter);
         txt_id_dokter.setBounds(1100, 70, 180, 40);
+
+        txt_nama_dokter.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_nama_dokter.setForeground(new java.awt.Color(75, 116, 55));
         getContentPane().add(txt_nama_dokter);
-        txt_nama_dokter.setBounds(1050, 370, 360, 40);
+        txt_nama_dokter.setBounds(1030, 370, 360, 40);
+
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setOpaque(false);
 
         txt_hasil_konsul.setColumns(20);
+        txt_hasil_konsul.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_hasil_konsul.setForeground(new java.awt.Color(75, 116, 55));
         txt_hasil_konsul.setRows(5);
+        txt_hasil_konsul.setBorder(null);
+        txt_hasil_konsul.setMargin(new java.awt.Insets(10, 50, 10, 10));
         jScrollPane1.setViewportView(txt_hasil_konsul);
 
         getContentPane().add(jScrollPane1);

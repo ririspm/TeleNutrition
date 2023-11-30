@@ -68,9 +68,11 @@ public class tampilan_input_hasil extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         id_konsul = new javax.swing.JLabel();
         txt_total = new javax.swing.JTextField();
-        txt_advice = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txt_imt = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txt_advice = new javax.swing.JTextArea();
         txt_nik = new javax.swing.JLabel();
-        txt_imt = new javax.swing.JTextField();
         txt_id_detaill = new javax.swing.JLabel();
         txt_id_dokter = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -88,6 +90,7 @@ public class tampilan_input_hasil extends javax.swing.JFrame {
         getContentPane().add(id_user);
         id_user.setBounds(660, 80, 51, 20);
 
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -99,16 +102,35 @@ public class tampilan_input_hasil extends javax.swing.JFrame {
         id_konsul.setText("jLabel2");
         getContentPane().add(id_konsul);
         id_konsul.setBounds(1000, 50, 80, 20);
-        getContentPane().add(txt_total);
-        txt_total.setBounds(1390, 876, 230, 30);
-        getContentPane().add(txt_advice);
-        txt_advice.setBounds(740, 850, 470, 150);
 
+        txt_total.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_total.setForeground(new java.awt.Color(75, 116, 55));
+        getContentPane().add(txt_total);
+        txt_total.setBounds(1390, 866, 230, 50);
+
+        txt_imt.setColumns(20);
+        txt_imt.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_imt.setForeground(new java.awt.Color(75, 116, 55));
+        txt_imt.setRows(5);
+        jScrollPane1.setViewportView(txt_imt);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(730, 560, 490, 160);
+
+        txt_advice.setColumns(20);
+        txt_advice.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_advice.setForeground(new java.awt.Color(75, 116, 55));
+        txt_advice.setRows(5);
+        jScrollPane2.setViewportView(txt_advice);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(730, 840, 490, 160);
+
+        txt_nik.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_nik.setForeground(new java.awt.Color(75, 116, 55));
         txt_nik.setText("jLabel2");
         getContentPane().add(txt_nik);
         txt_nik.setBounds(940, 370, 470, 40);
-        getContentPane().add(txt_imt);
-        txt_imt.setBounds(740, 560, 470, 150);
 
         txt_id_detaill.setText("jLabel2");
         getContentPane().add(txt_id_detaill);
@@ -131,9 +153,10 @@ public class tampilan_input_hasil extends javax.swing.JFrame {
         String total = txt_total.getText();
         String id_detail = txt_id_detaill.getText();
         String id_dokter = txt_id_dokter.getText();
+        String hasil_terbaru = id_hasil_konsul.getText();
         
         try {
-            String sql = "INSERT INTO konsultasi VALUES ('"+id_hasil_konsul.getText()+"','"+imt+"','"+advice+"','"+id_detail+"','"+id_dokter+"','"+total+"')";
+            String sql = "INSERT INTO `konsultasi`(`id_konsultasi`, `imt_bti`, `advice`, `id_detail`, `id_dokter`, `total`) VALUES ('"+id_hasil_konsul.getText()+"','"+imt+"','"+advice+"','"+id_detail+"','"+id_dokter+"','"+total+"')";
             java.sql.Connection conn = (Connection)koneksi.konek.configDB();
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             pst.executeUpdate();
@@ -142,6 +165,7 @@ public class tampilan_input_hasil extends javax.swing.JFrame {
             new tampilan_diet_plan().setVisible(true);
             tampilan_diet_plan.id_detail.setText(id_detail);
             tampilan_diet_plan.id_dokter.setText(id_dokter);
+            tampilan_diet_plan.id_hasil_konsul.setText(hasil_terbaru);
             dispose();
             
         } catch (Exception e) {
@@ -190,10 +214,12 @@ public class tampilan_input_hasil extends javax.swing.JFrame {
     public static javax.swing.JLabel id_user;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField txt_advice;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    public static javax.swing.JTextArea txt_advice;
     public static javax.swing.JLabel txt_id_detaill;
     public static javax.swing.JLabel txt_id_dokter;
-    private javax.swing.JTextField txt_imt;
+    public static javax.swing.JTextArea txt_imt;
     public static javax.swing.JLabel txt_nik;
     private javax.swing.JTextField txt_total;
     // End of variables declaration//GEN-END:variables

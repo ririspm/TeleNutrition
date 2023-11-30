@@ -25,6 +25,7 @@ public class tampilan_list_konsul extends javax.swing.JFrame {
     public tampilan_list_konsul() {
         initComponents();
         konsultasi();
+        tb_list.getTableHeader().setBackground(new java.awt.Color(199, 254, 198));
     }
     void tampil(){
         try {
@@ -136,6 +137,8 @@ public class tampilan_list_konsul extends javax.swing.JFrame {
         getContentPane().add(jButton7);
         jButton7.setBounds(0, 220, 480, 100);
 
+        tb_list.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 16)); // NOI18N
+        tb_list.setForeground(new java.awt.Color(199, 254, 198));
         tb_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -206,7 +209,7 @@ public class tampilan_list_konsul extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

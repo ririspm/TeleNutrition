@@ -8,7 +8,14 @@ package dashboard;
 import static dashboard.tampilan_dashboard.id_detail;
 import static dashboard.tampilan_dashboard.txt_iduser;
 import java.sql.Connection;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
+import koneksi.konek;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -72,6 +79,7 @@ public class tampilan_report extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         hasil = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -92,11 +100,23 @@ public class tampilan_report extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         hasil.setColumns(20);
+        hasil.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        hasil.setForeground(new java.awt.Color(75, 116, 55));
         hasil.setRows(5);
         jScrollPane1.setViewportView(hasil);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(630, 350, 1030, 390);
+
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(1380, 790, 270, 70);
 
         jButton9.setContentAreaFilled(false);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -237,6 +257,23 @@ public class tampilan_report extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
+            java.sql.Connection conn = (Connection)koneksi.konek.configDB();
+            java.sql.Statement stm = conn.createStatement();
+            String report = ("C:\\Users\\HP\\OneDrive\\Documents\\NetBeansProjects\\telenutrition1\\src\\report\\report1.jrxml");
+            HashMap hash = new HashMap();
+            hash.put("id_detail", id_detail.getText());
+            JasperReport JRpt = JasperCompileManager.compileReport(report);
+            JasperPrint JPrint = JasperFillManager.fillReport(JRpt, hash, conn);
+            JasperViewer.viewReport(JPrint, false);
+            
+            System.out.println("berhasil");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -275,6 +312,7 @@ public class tampilan_report extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextArea hasil;
     public static javax.swing.JLabel id_detail;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;

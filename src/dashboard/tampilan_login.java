@@ -98,15 +98,19 @@ public class tampilan_login extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(790, 810, 340, 70);
 
+        txt_email.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_email.setForeground(new java.awt.Color(75, 116, 55));
         txt_email.setBorder(null);
         txt_email.setOpaque(false);
         getContentPane().add(txt_email);
-        txt_email.setBounds(770, 446, 510, 50);
+        txt_email.setBounds(770, 460, 510, 50);
 
+        txt_pass.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_pass.setForeground(new java.awt.Color(75, 116, 55));
         txt_pass.setBorder(null);
         txt_pass.setOpaque(false);
         getContentPane().add(txt_pass);
-        txt_pass.setBounds(770, 556, 510, 50);
+        txt_pass.setBounds(770, 570, 510, 50);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Halaman Login.png"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -162,7 +166,7 @@ public class tampilan_login extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

@@ -101,6 +101,7 @@ public class tampilan_diet_plan extends javax.swing.JFrame {
         id_detail = new javax.swing.JLabel();
         id_rm = new javax.swing.JLabel();
         id_user = new javax.swing.JLabel();
+        id_hasil_konsul = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_hasil = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
@@ -109,13 +110,14 @@ public class tampilan_diet_plan extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1920, 1080));
         getContentPane().setLayout(null);
 
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(1270, 960, 330, 80);
+        jButton1.setBounds(1270, 950, 330, 90);
 
         id_dokter.setText("jLabel2");
         getContentPane().add(id_dokter);
@@ -133,7 +135,12 @@ public class tampilan_diet_plan extends javax.swing.JFrame {
         getContentPane().add(id_user);
         id_user.setBounds(660, 80, 51, 20);
 
+        id_hasil_konsul.setText("jLabel2");
+        getContentPane().add(id_hasil_konsul);
+        id_hasil_konsul.setBounds(1180, 80, 51, 20);
+
         txt_hasil.setColumns(20);
+        txt_hasil.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
         txt_hasil.setRows(5);
         jScrollPane1.setViewportView(txt_hasil);
 
@@ -158,7 +165,7 @@ public class tampilan_diet_plan extends javax.swing.JFrame {
             java.sql.PreparedStatement pst = conn.prepareStatement(sql);
             java.sql.ResultSet rst = pst.executeQuery();
             if(rst.next()){
-                           String sql4 = "UPDATE hasil_konsultasi SET hasil = '"+txt_hasil.getText()+"' where id_detail = '"+txt_id_detaill.getText()+"' ";
+                           String sql4 = "UPDATE hasil_konsultasi SET hasil = '"+txt_hasil.getText()+"', id_konsultasi_terbaru = '"+id_hasil_konsul.getText()+"' where id_detail = '"+txt_id_detaill.getText()+"' ";
             java.sql.Connection con4 = (Connection)koneksi.konek.configDB();
             java.sql.PreparedStatement pst4 = con4.prepareStatement(sql4);
             pst4.executeUpdate();
@@ -175,7 +182,7 @@ public class tampilan_diet_plan extends javax.swing.JFrame {
               // insert data  
             }else{
                 try {
-                    String sql2 = "INSERT INTO hasil_konsultasi VALUES ('"+id_rm.getText()+"','"+txt_hasil.getText()+"','"+id_detail+"','"+id_dokter+"')";
+                    String sql2 = "INSERT INTO `hasil_konsultasi`(`id_rm`, `hasil`, `id_detail`, `id_dokter`,id_konsultasi_terbaru) values ('"+id_rm.getText()+"','"+txt_hasil.getText()+"','"+id_detail+"','"+id_dokter+"','"+id_hasil_konsul.getText()+"')";
             java.sql.Connection con2 = (Connection)koneksi.konek.configDB();
             java.sql.PreparedStatement pst2 = con2.prepareStatement(sql2);
             pst2.executeUpdate();
@@ -255,6 +262,7 @@ public class tampilan_diet_plan extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel id_detail;
     public static javax.swing.JLabel id_dokter;
+    public static javax.swing.JLabel id_hasil_konsul;
     public static javax.swing.JLabel id_rm;
     public static javax.swing.JLabel id_user;
     private javax.swing.JButton jButton1;

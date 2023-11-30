@@ -62,6 +62,27 @@ public class tampilan_konsultasi extends javax.swing.JFrame {
 
         }
     }
+      public void showdata(){
+        try {
+            String sql = "SELECT * from detail_user where id_user = '"+txt_iduser.getText()+"' ";
+            java.sql.Connection conn = (Connection)koneksi.konek.configDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            java.sql.ResultSet rst = pst.executeQuery();
+            
+            if(rst.next()){
+                tampilan_biodata.txt_nik.setText(rst.getString("nik"));
+                tampilan_biodata.txt_nama.setText(rst.getString("nama_lengkap"));
+                tampilan_biodata.txt_tanggal.setText(rst.getString("tanggal_lahir"));
+                tampilan_biodata.txt_umur.setText(rst.getString("umur"));
+//                txt.setText(rst.getString("jenis_kelamin"));
+                tampilan_biodata.txt_tb.setText(rst.getString("tb"));
+                tampilan_biodata.txt_bb.setText(rst.getString("bb"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Gagal");
+        }
+    
+    }
     
 
     /**
@@ -75,8 +96,10 @@ public class tampilan_konsultasi extends javax.swing.JFrame {
 
         txt_total = new javax.swing.JLabel();
         nik = new javax.swing.JLabel();
-        txt_imt = new javax.swing.JTextField();
-        txt_advice = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txt_imt = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txt_advice = new javax.swing.JTextArea();
         jButton10 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -92,15 +115,31 @@ public class tampilan_konsultasi extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(null);
 
-        txt_total.setText("jLabel3");
+        txt_total.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
         getContentPane().add(txt_total);
-        txt_total.setBounds(1360, 810, 180, 30);
+        txt_total.setBounds(1360, 800, 180, 50);
+
+        nik.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
         getContentPane().add(nik);
-        nik.setBounds(900, 310, 330, 30);
-        getContentPane().add(txt_imt);
-        txt_imt.setBounds(690, 490, 500, 160);
-        getContentPane().add(txt_advice);
-        txt_advice.setBounds(690, 780, 500, 150);
+        nik.setBounds(900, 300, 530, 50);
+
+        txt_imt.setColumns(20);
+        txt_imt.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_imt.setForeground(new java.awt.Color(75, 116, 55));
+        txt_imt.setRows(5);
+        jScrollPane1.setViewportView(txt_imt);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(690, 490, 500, 160);
+
+        txt_advice.setColumns(20);
+        txt_advice.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_advice.setForeground(new java.awt.Color(75, 116, 55));
+        txt_advice.setRows(5);
+        jScrollPane2.setViewportView(txt_advice);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(690, 780, 500, 160);
 
         jButton10.setContentAreaFilled(false);
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -183,6 +222,7 @@ public class tampilan_konsultasi extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         new tampilan_biodata().setVisible(true);
+        showdata();
         String id_details = id_detail.getText();
         tampilan_biodata.id_detail.setText(id_details);
          String id = txt_iduser.getText();
@@ -272,10 +312,12 @@ public class tampilan_konsultasi extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JLabel nik;
-    public static javax.swing.JTextField txt_advice;
+    public static javax.swing.JTextArea txt_advice;
     public static javax.swing.JLabel txt_iduser;
-    public static javax.swing.JTextField txt_imt;
+    public static javax.swing.JTextArea txt_imt;
     public static javax.swing.JLabel txt_total;
     // End of variables declaration//GEN-END:variables
 }

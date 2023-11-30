@@ -89,6 +89,8 @@ public class tampilan_create_akun extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(760, 720, 480, 70);
 
+        txt_username.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_username.setForeground(new java.awt.Color(75, 116, 55));
         txt_username.setBorder(null);
         txt_username.setOpaque(false);
         txt_username.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +101,8 @@ public class tampilan_create_akun extends javax.swing.JFrame {
         getContentPane().add(txt_username);
         txt_username.setBounds(980, 350, 360, 50);
 
+        txt_email.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_email.setForeground(new java.awt.Color(75, 116, 55));
         txt_email.setBorder(null);
         txt_email.setOpaque(false);
         txt_email.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +117,8 @@ public class tampilan_create_akun extends javax.swing.JFrame {
         getContentPane().add(txt_id_user);
         txt_id_user.setBounds(1190, 230, 120, 20);
 
+        txt_password.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_password.setForeground(new java.awt.Color(75, 116, 55));
         txt_password.setBorder(null);
         txt_password.setOpaque(false);
         getContentPane().add(txt_password);

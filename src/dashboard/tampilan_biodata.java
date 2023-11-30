@@ -14,6 +14,11 @@ import static dashboard.tampilan_choose_doctor.txt_iduser;
 import static dashboard.tampilan_dashboard.id_detail;
 import static dashboard.tampilan_dashboard.tampil_hasil_konsul;
 import static dashboard.tampilan_dashboard.txt_iduser;
+import dokter.tampilan_diet_plan;
+import static dokter.tampilan_input_hasil.txt_advice;
+import static dokter.tampilan_input_hasil.txt_id_detaill;
+import static dokter.tampilan_input_hasil.txt_id_dokter;
+import static dokter.tampilan_input_hasil.txt_imt;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -142,7 +147,12 @@ public class tampilan_biodata extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txt_id = new javax.swing.JLabel();
         txt_iduser = new javax.swing.JLabel();
+        id_detail = new javax.swing.JLabel();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
         jButton9 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
@@ -154,18 +164,32 @@ public class tampilan_biodata extends javax.swing.JFrame {
         txt_umur = new javax.swing.JTextField();
         txt_bb = new javax.swing.JTextField();
         txt_tb = new javax.swing.JTextField();
-        txt_id = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        id_detail = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+
+        id_detail.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1920, 1080));
         setUndecorated(true);
         getContentPane().setLayout(null);
-        getContentPane().add(txt_iduser);
-        txt_iduser.setBounds(720, 70, 170, 40);
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setOpaque(false);
+        getContentPane().add(jRadioButton1);
+        jRadioButton1.setBounds(940, 740, 50, 29);
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setOpaque(false);
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jRadioButton2);
+        jRadioButton2.setBounds(1260, 730, 50, 50);
 
         jButton9.setContentAreaFilled(false);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -214,6 +238,8 @@ public class tampilan_biodata extends javax.swing.JFrame {
         getContentPane().add(jButton10);
         jButton10.setBounds(0, 220, 480, 110);
 
+        txt_nik.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_nik.setForeground(new java.awt.Color(75, 116, 55));
         txt_nik.setBorder(null);
         txt_nik.setOpaque(false);
         txt_nik.addActionListener(new java.awt.event.ActionListener() {
@@ -224,32 +250,40 @@ public class tampilan_biodata extends javax.swing.JFrame {
         getContentPane().add(txt_nik);
         txt_nik.setBounds(920, 366, 640, 40);
 
+        txt_nama.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_nama.setForeground(new java.awt.Color(75, 116, 55));
         txt_nama.setBorder(null);
         txt_nama.setOpaque(false);
         getContentPane().add(txt_nama);
-        txt_nama.setBounds(920, 456, 640, 40);
+        txt_nama.setBounds(920, 460, 640, 40);
 
+        txt_tanggal.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_tanggal.setForeground(new java.awt.Color(75, 116, 55));
         txt_tanggal.setBorder(null);
         txt_tanggal.setOpaque(false);
         getContentPane().add(txt_tanggal);
         txt_tanggal.setBounds(920, 546, 640, 40);
 
+        txt_umur.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_umur.setForeground(new java.awt.Color(75, 116, 55));
         txt_umur.setBorder(null);
         txt_umur.setOpaque(false);
         getContentPane().add(txt_umur);
         txt_umur.setBounds(920, 646, 640, 40);
 
+        txt_bb.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_bb.setForeground(new java.awt.Color(75, 116, 55));
         txt_bb.setBorder(null);
         txt_bb.setOpaque(false);
         getContentPane().add(txt_bb);
         txt_bb.setBounds(920, 826, 640, 40);
 
+        txt_tb.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
+        txt_tb.setForeground(new java.awt.Color(75, 116, 55));
         txt_tb.setBorder(null);
         txt_tb.setOpaque(false);
         getContentPane().add(txt_tb);
-        txt_tb.setBounds(920, 916, 640, 40);
-        getContentPane().add(txt_id);
-        txt_id.setBounds(710, 240, 120, 30);
+        txt_tb.setBounds(920, 920, 640, 40);
 
         jButton1.setBorder(null);
         jButton1.setContentAreaFilled(false);
@@ -259,11 +293,17 @@ public class tampilan_biodata extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(1353, 1000, 260, 40);
+        jButton1.setBounds(1350, 1000, 260, 40);
 
-        id_detail.setText("jLabel2");
-        getContentPane().add(id_detail);
-        id_detail.setBounds(910, 60, 51, 20);
+        jButton2.setBorder(null);
+        jButton2.setContentAreaFilled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(1060, 1000, 260, 40);
 
         jButton8.setContentAreaFilled(false);
         jButton8.setInheritsPopupMenu(true);
@@ -275,7 +315,7 @@ public class tampilan_biodata extends javax.swing.JFrame {
         getContentPane().add(jButton8);
         jButton8.setBounds(0, 850, 480, 100);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Halaman Biodata (3).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Halaman FIX.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 1920, 1080);
 
@@ -340,8 +380,6 @@ public class tampilan_biodata extends javax.swing.JFrame {
 //        String jenis_kelamin = .getText();
         String bb = txt_bb.getText();
         String tb = txt_tb.getText();
-        
-        
         String id = txt_iduser.getText();
         
         try {
@@ -422,6 +460,39 @@ public class tampilan_biodata extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      String iduser = txt_iduser.getText();
+        String iddetail = txt_id.getText();
+        String nik = txt_nik.getText();
+        String name = txt_nama.getText();
+        String birth = txt_tanggal.getText();
+        String age = txt_umur.getText();
+//        String jenis_kelamin = .getText();
+        String bb = txt_bb.getText();
+        String tb = txt_tb.getText();
+        String id = txt_iduser.getText();
+        
+        try {
+            String sql = "Delete from detail_user where id_detail = '"+id_detail+"' ";
+            java.sql.Connection conn = (Connection)koneksi.konek.configDB();
+            java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Berhasil Dihapus");
+            
+            new tampilan_dashboard().setVisible(true);
+            tampilan_choose_doctor.txt_iduser.setText(id);
+                    tampilan_choose_doctor.id_detail.setText(iddetail);
+            dispose();
+            
+        } catch (Exception e) {
+             System.out.println("Gagal Le"+ e.getMessage());
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
     /**
      * @param args the command line  arguments
      */
@@ -458,15 +529,19 @@ public class tampilan_biodata extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     public static javax.swing.JLabel id_detail;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     public static javax.swing.JTextField txt_bb;
     private javax.swing.JLabel txt_id;
     public static javax.swing.JLabel txt_iduser;
